@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "full_name": "narin",
+    "email": "narin.rina2016@gmail.com",
+    "role": "Admin",
+    "is_active": true,
+    "department_id": 1
+  },
+  {
+    "id": 2,
+    "full_name": "អ៊ុច កុសល",
+    "email": "ldkjfdaskf@jakldasd.com",
+    "role": "Department Head",
+    "is_active": true,
+    "department_id": null
+  },
+  {
+    "id": 3,
+    "full_name": "System Admin",
+    "email": "admin@example.com",
+    "role": "Admin",
+    "is_active": true,
+    "department_id": null
+  },
+  {
+    "id": 4,
+    "full_name": "Department Head",
+    "email": "head@example.com",
+    "role": "Department Head",
+    "is_active": true,
+    "department_id": null
+  }
+]

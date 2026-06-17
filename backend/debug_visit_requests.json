@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "visitor_type": null,
+    "school_name": "អនុវិទ្យាល័យត្រពាំងសាលា ",
+    "visit_date": "2026-06-18T08:00:00",
+    "total_students": 311,
+    "female_students": 35,
+    "total_teachers": null,
+    "female_teachers": null,
+    "need_guide": true,
+    "guide_count": null,
+    "contact_info": "015 55 02 09 . 098 932 900",
+    "letter_number": null,
+    "status": "Approved",
+    "assigned_to": 1,
+    "created_at": "2026-06-15T16:09:19"
+  },
+  {
+    "id": 2,
+    "visitor_type": "គ្រឹះស្ថានអប់រំ",
+    "school_name": "សលារៀនបេះដូងសម្រាប់វិជ្ជាដាក់លិ",
+    "visit_date": "2026-05-30T08:00:00",
+    "total_students": 168,
+    "female_students": 0,
+    "total_teachers": 19,
+    "female_teachers": 0,
+    "need_guide": true,
+    "guide_count": 4,
+    "contact_info": "0",
+    "letter_number": "2034 ប.ស.វ",
+    "status": "Assigned",
+    "assigned_to": 2,
+    "created_at": "2026-06-16T17:32:21"
+  }
+]
