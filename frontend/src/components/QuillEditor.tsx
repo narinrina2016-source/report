@@ -1,10 +1,12 @@
-import React, { useMemo } from 'react';
-import ReactQuill, { Quill } from 'react-quill-new';
-import 'react-quill-new/dist/quill.snow.css';
-import ImageResize from 'quill-image-resize-module-react';
+"use client";
 
-// Register the module
-Quill.register('modules/imageResize', ImageResize);
+import dynamic from 'next/dynamic';
+import React from 'react';
+
+const QuillEditorInner = dynamic(() => import('./QuillEditorInner'), { 
+  ssr: false,
+  loading: () => <div className="p-4 text-center text-gray-500 border rounded min-h-[200px] flex items-center justify-center">កំពុងទាញយកកម្មវិធីកែសម្រួល...</div>
+});
 
 interface QuillEditorProps {
   value: string;
@@ -12,30 +14,6 @@ interface QuillEditorProps {
   className?: string;
 }
 
-export default function QuillEditor({ value, onChange, className }: QuillEditorProps) {
-  const modules = useMemo(() => ({
-    toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      [{ 'color': [] }, { 'background': [] }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      [{ 'align': [] }],
-      ['image'], // Added image button for signatures
-      ['clean']
-    ],
-    imageResize: {
-      parchment: Quill.import('parchment'),
-      modules: [ 'Resize', 'DisplaySize' ]
-    }
-  }), []);
-
-  return (
-    <ReactQuill 
-      theme="snow" 
-      value={value} 
-      onChange={onChange}
-      className={className}
-      modules={modules}
-    />
-  );
+export default function QuillEditor(props: QuillEditorProps) {
+  return <QuillEditorInner {...props} />;
 }
