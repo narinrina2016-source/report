@@ -13,7 +13,6 @@ import type { IHighlight, NewHighlight } from "react-pdf-highlighter";
 import "pdfjs-dist/web/pdf_viewer.css"; // Ensure text layer is styled correctly
 import "react-pdf-highlighter/dist/style.css"; // Ensure CSS is imported
 import { MessageSquare, Trash2, Save, PlusCircle } from "lucide-react";
-import * as pdfjsLib from "pdfjs-dist";
 
 if (typeof window !== "undefined") {
   const originalError = console.error;
@@ -25,9 +24,6 @@ if (typeof window !== "undefined") {
     originalError.apply(console, args);
   };
 }
-
-const WORKER_SRC = `/pdf.worker.min.mjs`;
-pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER_SRC;
 
 const getNextId = () => String(Math.random()).slice(2);
 
@@ -93,6 +89,14 @@ const CustomTip = ({
 
 export function PdfReviewer({ pdfUrl, reportId, initialAnnotations = [], onSave, readOnly = false }: PdfReviewerProps) {
   const [highlights, setHighlights] = useState<Array<IHighlight>>(initialAnnotations);
+  const [isPdfLoaded, setIsPdfLoaded] = useState(false);
+
+  useEffect(() => {
+    import("pdfjs-dist").then(pdfjsLib => {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
+    });
+  }, []);
+  
   const scrollViewerTo = useRef((highlight: IHighlight) => {});
   
   useEffect(() => {
@@ -241,7 +245,6 @@ export function PdfReviewer({ pdfUrl, reportId, initialAnnotations = [], onSave,
         <PdfLoader 
           url={pdfUrl} 
           beforeLoad={<div className="flex items-center justify-center h-full">កំពុងទាញយកឯកសារ PDF... (Loading PDF...)</div>}
-          workerSrc={WORKER_SRC}
           errorMessage={<div className="flex items-center justify-center h-full text-red-500">មានបញ្ហាក្នុងការបើកឯកសារ PDF។ អាចមកពីឯកសារមិនទាន់រួចរាល់ ឫមានបញ្ហា Network។ សូម Refresh ម្តងទៀត!</div>}
           onError={(error) => console.error("PDF Load Error:", error)}
         >
