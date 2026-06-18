@@ -1,3 +1,4 @@
+"use client";
 import { FileText, Clock, CheckCircle, TrendingUp } from "lucide-react";
 import dynamic from "next/dynamic";
 

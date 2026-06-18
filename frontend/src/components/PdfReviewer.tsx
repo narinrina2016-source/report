@@ -152,8 +152,8 @@ export function PdfReviewer({ pdfUrl, reportId, initialAnnotations = [], onSave,
     }
   };
 
-  const commentCount = highlights.filter((h) => h.comment?.type !== "add_text").length;
-  const addTextCount = highlights.filter((h) => h.comment?.type === "add_text").length;
+  const commentCount = highlights.filter((h) => (h.comment as any)?.type !== "add_text").length;
+  const addTextCount = highlights.filter((h) => (h.comment as any)?.type === "add_text").length;
 
   return (
     <div className="flex h-full w-full bg-gray-50 border rounded-lg overflow-hidden">
@@ -210,7 +210,7 @@ export function PdfReviewer({ pdfUrl, reportId, initialAnnotations = [], onSave,
                   </button>
                 )}
                 <div className="flex items-center gap-1 mb-2">
-                  {highlight.comment?.type === "add_text" ? (
+                  {(highlight.comment as any)?.type === "add_text" ? (
                     <>
                       <PlusCircle className="w-4 h-4 text-red-500" />
                       <span className="text-xs font-bold text-red-600 uppercase tracking-wider">បន្ថែមប្រយោគថ្មី</span>
@@ -315,15 +315,15 @@ export function PdfReviewer({ pdfUrl, reportId, initialAnnotations = [], onSave,
                 // Simple stable check for first highlight on this line
                 const isFirstOnLine = nearbyHighlights[0] === highlight;
 
-                const commentsCount = nearbyHighlights.filter((h) => h.comment?.type !== "add_text").length;
-                const addTextsCount = nearbyHighlights.filter((h) => h.comment?.type === "add_text").length;
+                const commentsCount = nearbyHighlights.filter((h) => (h.comment as any)?.type !== "add_text").length;
+                const addTextsCount = nearbyHighlights.filter((h) => (h.comment as any)?.type === "add_text").length;
                 
                 const badgeTop = highlight.position.boundingRect?.top ?? highlight.position.rects?.[0]?.top;
                 
                 // Calculate the left-most edge of the highlights on this line
                 const minLeft = Math.min(...nearbyHighlights.map(h => {
                   const rect = h.position.boundingRect ?? h.position.rects?.[0];
-                  const l = typeof rect?.left === "string" ? parseFloat(rect.left) : (rect?.left ?? 0);
+                  const l = typeof (rect as any)?.left === "string" ? parseFloat((rect as any).left) : ((rect as any)?.left ?? 0);
                   return l;
                 }));
 
